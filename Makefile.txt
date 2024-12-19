@@ -1,0 +1,28 @@
+# Derleyici ve Bayraklar
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99 -g
+
+# Çıktı Dosyası
+TARGET = DungeonGame
+
+# Kaynak ve Nesne Dosyaları
+SRCS = main.c character.c inventory.c item.c room.c interactEffects.c save_load.c trader.c
+OBJS = $(SRCS:.c=.o)
+
+# Varsayılan Hedef
+all: $(TARGET)
+
+# Çıktı Dosyasını Nasıl Oluşturacağını Belirler
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# .c Dosyalarından .o Dosyalarını Nasıl Oluşturacağını Belirler
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Temizlik Komutu
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+# Yeniden Derleme
+rebuild: clean all
